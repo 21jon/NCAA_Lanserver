@@ -6,3 +6,29 @@ services:
    env_file: 
     - ./Dockerfiles/csgo/.env
    restart: unless-stopped
+  cod4:
+    image: qmcgaw/cod4
+    container_name: cod4
+    volumes:
+      #TODO: import files
+      # - ./main:/home/user/cod4/main
+      # - ./zone:/home/user/cod4/zone
+      # - ./mods:/home/user/cod4/mods
+      # - ./usermaps:/home/user/cod4/usermaps:ro
+      # - ./logs:/home/user/.callofduty4
+    network_mode: bridge
+    environment:
+      - HTTP_SERVER=on
+      - ROOT_URL=/
+    ports:
+      # COD4x server
+      - 28960:28960/udp
+      # Master list
+      - 28960:28960/tcp
+      # Serving mods and usermaps over http
+      - 8000:8000/tcp
+    command: +set dedicated 2+set sv_cheats 1+set sv_maxclients 64+set ui_maxclients 64+exec server.cfg+map_rotate
+    restart: always
+  l4d:
+    TODO:docker run -p 27015:27015 -p 27015:27015/udp sunbowworld/left4dead2server
+
