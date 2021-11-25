@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  csgo:
+   image: cm2network/csgo:latest
+   env_file: 
+    - ./Dockerfiles/csgo/.env
+   restart: unless-stopped
